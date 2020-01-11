@@ -27,5 +27,5 @@ This script parses the named file to create something knowable by thetvdb.com li
 * ... should produce output like so:
 * ```mv "/tmp/foo/tvshow.name.s01e01.x264.ExAmPlE.mkv" "/tmp/staging/TV Show Name S01E01 - Episode Name.mkv"```
   * **NOTE:** the script doesn't run the above commands to rename the file, but rather echoes out the commands to be run.  To apply what the script wants to do, rerun the script like so:
-```tvdb_scrape.sh /tmp/foo/tvshow.name.s01e01.x264.ExAmPlE.mk | sh``` 
+  * ```tvdb_scrape.sh /tmp/foo/tvshow.name.s01e01.x264.ExAmPlE.mk | sh``` 
 
