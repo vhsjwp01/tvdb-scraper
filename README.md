@@ -13,9 +13,9 @@ TVDB_USERNAME="<your thetvdb.com username>"
 TVDB_USERKEY="<your thetvdb.com user key> (login and visit your dashboard to retrieve this)"
 TVDB_APIKEY="<your thetvdb.com API key>"
 TVDB_URL="https://api.thetvdb.com"
-JWT_TOKEN_FILE="/tmp/${USER}.thetvdb_api.token"
+JWT_FILE="/tmp/${USER}.thetvdb_api.token"
 # 86400 seconds = 24 hours
-JWT_TOKEN_EXPIRY="3600"
+JWT_EXPIRY="3600"
 incoming_folder="<path to files needing to be renamed>"
 staging_folder="<path to put renamed files>"
 ```
