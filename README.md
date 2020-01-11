@@ -20,9 +20,9 @@ staging_folder="<path to put renamed files>"
 ```
 
 This script parses the named file to create something knowable by thetvdb.com like so:
-* path of 'incoming_folder' = "/tmp/foo"
-* path of 'staging_folder' = "/tmp/staging"
-* name of tvshow in 'incoming_folder' = "tvshow.name.s01e01.x264.ExAmPlE.mkv"
+* Assume a path of `incoming_folder="/tmp/foo"`
+* Assume a path of `staging_folder="/tmp/staging"`
+* Assume a name of tvshow in `incoming_folder` of `"tvshow.name.s01e01.x264.ExAmPlE.mkv"`
 * `tvdb_scrape.sh /tmp/foo/tvshow.name.s01e01.x264.ExAmPlE.mkv`
 * ... should produce output like so:
 * ```mv "/tmp/foo/tvshow.name.s01e01.x264.ExAmPlE.mkv" "/tmp/staging/TV Show Name S01E01 - Episode Name.mkv"```
