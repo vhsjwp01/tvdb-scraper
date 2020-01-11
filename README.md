@@ -30,4 +30,6 @@ This script parses the named file to create something knowable by **thetvdb.com*
     * ```mv "/tmp/foo/tvshow.name.s01e01.x264.ExAmPlE.mkv" "/tmp/staging/TV Show Name S01E01 - Episode Name.mkv"```
   * **NOTE:** the script doesn't run the above commands to rename the file, but rather echoes out the commands to be run.  To apply what the script wants to do, rerun the script like so:
     * ```tvdb_scrape.sh /tmp/foo/tvshow.name.s01e01.x264.ExAmPlE.mkv | sh``` 
+* If the tv show is located inside of a subfolder, the script will also emit commands to remove the subfolder
+* If there are multiple video files in the subfolder, you can provide a second argument `batch` which will prevent the script from emitting the command to remove the subfolder
 
