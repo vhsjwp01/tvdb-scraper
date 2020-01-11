@@ -4,6 +4,7 @@
 ## Pre-Requirements
 * you must create a **thetvdb.com** account
 * you must create an API key
+* A UNIX operating system with awk, bc, curl, iconv, jq, sed
 
 ## Requirements
 * the `tvdb_scrape.sh` script expects a variable named `defaults_file` (defaults to `"/etc/default/tvdb_scrape"`) that points to a configuration file whose format is as follows:
@@ -18,6 +19,7 @@ JWT_TOKEN_EXPIRY="3600"
 incoming_folder="<path to files needing to be renamed>"
 staging_folder="<path to put renamed files>"
 ```
+  * **NOTE:** The `defaults_file` variable in the script can be overridden by exporting an environment variable called `TVDB_SCRAPE_DEFAULTS`
 
 This script parses the named file to create something knowable by **thetvdb.com** API like so:
 * Assume a path of `incoming_folder="/tmp/foo"`

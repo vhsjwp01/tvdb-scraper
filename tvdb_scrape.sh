@@ -12,7 +12,12 @@ let exit_code=${SUCCESS}
 
 batch="false"
 debug=""
-defaults_file="/etc/default/tvdb_scrape" 
+
+if [ ! -z "${TVDB_SCRAPE_DEFAULTS}" ]; then
+    defaults_file="${TVDB_SCRAPE_DEFAULTS}"
+else
+    defaults_file="/etc/default/tvdb_scrape" 
+fi
 
 if [ -e "${defaults_file}" ]; then
     . ${defaults_file}
@@ -132,7 +137,7 @@ exit 0
 #curl -L -X GET --header 'Accept: application/json' --header 'Authorization: Bearer ${JWT_TOKEN}' 'https://api.thetvdb.com/series/295647/episodes/query?airedSeason=1&airedEpisode=1'
 
 # Parsing episode name
-#echo "star.wars.resistance.s01e12.720p.web.x264-tbs[eztv].mkv" | awk -F'[Ss][0-9]*[Ee][0-9]*' '{print $1}' | sed -e 's|[^a-zA-z\-]| |g' -e 's| |%20|g'
+#echo "star.wars.resistance.s01e12.720p.web.x264-tbs[eztv].mkv" | awk -F'[Ss][0-9]*[Ee][0-9]*' '{print $1}' | sed -e 's|[^a-zA-Z\-]| |g' -e 's| |%20|g'
 
 # Parsing episode number
 #echo "Vikings.S05E18.1080p.WEB.H264-METCON.mkv" | sed 's|^.*\([Ss][0-9]*[Ee][0-9]*\).*$|\1|g' | tr '[a-z]' '[A-Z]'
