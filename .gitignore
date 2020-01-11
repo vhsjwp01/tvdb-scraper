@@ -1,5 +1,2 @@
-# Object file
-*.o
-
-# Ada Library Information
-*.ali
+# Ignore VIM temp files
+.*.swp
