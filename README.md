@@ -32,4 +32,5 @@ This script parses the named file to create something knowable by **thetvdb.com*
     * ```tvdb_scrape.sh /tmp/foo/tvshow.name.s01e01.x264.ExAmPlE.mkv | sh``` 
 * If the tv show is located inside of a subfolder, the script will also emit commands to remove the subfolder
 * If there are multiple video files in the subfolder, you can provide a second argument `batch` which will prevent the script from emitting the command to remove the subfolder
+* If the second argument to the script is `debug`, `debug-batch`, `batch-debug`, `debugbatch`, or `batchdebug` then debugging output regarding retrieved series information will also be displayed in addition to the file rename/folder rm commands
 
