@@ -223,11 +223,11 @@ fi
 if [ ${exit_code} -ne ${SUCCESS} ]; then
 
     if [ ! -z "${err_msg}" ]; then
-        echo
-        echo "    ERROR:  ${err_msg} ... processing halted" >&2
-        echo
-        echo "    USAGE: ${0} <path to tv show file> [debug|batch|batch-debug]"
-        echo
+        echo ""                                                                 >&2
+        echo "    ERROR:  ${err_msg} ... processing halted"                     >&2
+        echo ""                                                                 >&2
+        echo "    USAGE: ${0} <path to tv show file> [debug|batch|batch-debug]" >&2
+        echo ""                                                                 >&2
     fi
 
 fi
