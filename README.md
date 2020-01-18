@@ -2,8 +2,8 @@
 `tvdb_scrape.sh` is a command line tool for retrieving TV show episode information from **thetvdb.com** API
 
 ## Pre-Requirements
-* you must create a **thetvdb.com** account
-* you must create an API key
+* A working **thetvdb.com** account
+* A valid **thetvdb.com** an API key
 * A UNIX operating system with awk, bc, curl, iconv, jq, make, sed
 
 ## Installation
@@ -27,7 +27,7 @@ staging_folder="<path to put renamed files>"
 ```
   * **NOTE:** The `defaults_file` variable in the script can be overridden by exporting an environment variable called `TVDB_SCRAPE_DEFAULTS`
 
-This script parses the named file to create something knowable by **thetvdb.com** API like so:
+This script parses the file named by argument 1 to create something knowable by **thetvdb.com** API like so:
 * Assume a path of `incoming_folder="/tmp/foo"`
 * Assume a path of `staging_folder="/tmp/staging"`
 * Assume a name of tvshow in `incoming_folder` of `"tvshow.name.s01e01.x264.ExAmPlE.mkv"`
