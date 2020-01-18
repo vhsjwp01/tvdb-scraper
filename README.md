@@ -4,7 +4,7 @@
 ## Prerequisites
 * A working **thetvdb.com** account
 * A valid **thetvdb.com** an API key
-* A UNIX operating system with awk, bc, curl, iconv, jq, make, sed
+* A UNIX operating system with `awk`, `bc`, `curl`, `iconv`, `jq`, `make`, `sed`
 
 ### Installation
 ```
