@@ -1,4 +1,4 @@
-### TV DB Scraper
+# TV DB Scraper
 `tvdb_scrape.sh` is a command line tool for retrieving TV show episode information from **thetvdb.com** API
 
 ## Pre-Requirements
@@ -6,13 +6,13 @@
 * A valid **thetvdb.com** an API key
 * A UNIX operating system with awk, bc, curl, iconv, jq, make, sed
 
-## Installation
+### Installation
 ```
 prompt$> sudo make install
 ```
 Installs as `/usr/local/bin/tvdb_scrape.sh`
 
-## Requirements
+### Requirements
 * the `tvdb_scrape.sh` script expects a variable named `defaults_file` (defaults to `"/etc/default/tvdb_scrape"`) that points to a configuration file whose format is as follows:
 ```
 TVDB_USERNAME="<your thetvdb.com username>"
