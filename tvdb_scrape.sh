@@ -163,9 +163,9 @@ if [ ${exit_code} -eq ${SUCCESS} ]; then
             series_name=$(echo "${series_info}" | ${my_jq} ".seriesName" | ${my_iconv} -f utf-8 -t ascii//TRANSLIT | ${my_sed} -e 's|\"||g' -e 's|:| -|g')
             episode=$(echo "${input_file}" | ${my_sed} 's|^.*\([Ss][0-9]*[Ee][0-9]*\).*$|\1|g' | ${my_tr} '[a-z]' '[A-Z]')
     
-            ${debug} "Series ID: ${series_id}" 2> /dev/null
-            ${debug} "Series Name: ${series_name}" 2> /dev/null
-            ${debug} "Series Episode Number: ${episode}"
+            ${debug} "Series ID: ${series_id}"           2> /dev/null
+            ${debug} "Series Name: ${series_name}"       2> /dev/null
+            ${debug} "Series Episode Number: ${episode}" 2> /dev/null
     
             # Bail if we don't have an episode in the format of S[0-9]*E[0-9]*
             if [ ! -z "${episode}" ]; then
@@ -177,11 +177,11 @@ if [ ${exit_code} -eq ${SUCCESS} ]; then
                 if [ ! -z "${episode_info}" ]; then
                     episode_name=$(echo "${episode_info}" | ${my_jq} ".data[0].episodeName" | ${my_iconv} -f utf-8 -t ascii//TRANSLIT | ${my_sed} -e 's|"||g' -e 's|:| -|g' -e 's|?| |g' -e 's|  | |g' -e 's| ,|,|g' -e 's| $||g')
 
-                    ${debug} "Series Episode Name: ${episode_name}"
+                    ${debug} "Series Episode Name: ${episode_name}" 2> /dev/null
     
                     # Generate shell code for relocation and cleanup, provided that ${series_name} and ${episode_name} are defined
                     if [ "${series_name}" != "null" -a "${episode_name}" != "null" ]; then
-                        ${debug} "## Rename command:"
+                        ${debug} "## Rename command:" 2> /dev/null
                         echo "${my_mv} \"${input_dir}/${input_file}\" \"${staging_folder}/${series_name} S${aired_season}E${aired_episode} - ${episode_name}.${file_extension}\""
     
                         if [ "${input_dir}" != "." -a "${input_dir}" != "${incoming_folder}" -a "${input_dir}" != "/" -a "${input_dir}" != "/tmp" -a "${batch}" != "true" ]; then
