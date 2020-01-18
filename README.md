@@ -1,7 +1,7 @@
 # TV DB Scraper
 `tvdb_scrape.sh` is a command line tool for retrieving TV show episode information from **thetvdb.com** API
 
-## Pre-Requirements
+## Prerequisites
 * A working **thetvdb.com** account
 * A valid **thetvdb.com** an API key
 * A UNIX operating system with awk, bc, curl, iconv, jq, make, sed
