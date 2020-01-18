@@ -4,7 +4,10 @@
 ## Pre-Requirements
 * you must create a **thetvdb.com** account
 * you must create an API key
-* A UNIX operating system with awk, bc, curl, iconv, jq, sed
+* A UNIX operating system with awk, bc, curl, iconv, jq, make, sed
+
+## Installation
+```prompt$> sudo make install```
 
 ## Requirements
 * the `tvdb_scrape.sh` script expects a variable named `defaults_file` (defaults to `"/etc/default/tvdb_scrape"`) that points to a configuration file whose format is as follows:
