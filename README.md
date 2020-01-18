@@ -7,7 +7,9 @@
 * A UNIX operating system with awk, bc, curl, iconv, jq, make, sed
 
 ## Installation
-```prompt$> sudo make install```
+```
+prompt$> sudo make install
+```
 Installs as `/usr/local/bin/tvdb_scrape.sh`
 
 ## Requirements
