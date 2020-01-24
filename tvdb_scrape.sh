@@ -163,8 +163,15 @@ if [ ${exit_code} -eq ${SUCCESS} ]; then
         computed_series_slug=$(echo "${series_search_regex}" | ${my_tr} '[A-Z]' '[a-z]' | ${my_sed} -e 's|%20|-|g')
 
         if [ -e "${custom_regex_file}" ]; then
-            ${debug} "Processing Additional regex file: ${custom_regex_file}" 2> /dev/null
-            computed_series_slug=$(echo "${computed_series_slug}" | ${my_sed} -f "${custom_regex_file}")
+            echo "test line" | ${my_sed} -f "${custom_regex_file}" > /dev/null 2>&1
+
+            if [ ${?} -eq 0 ]; then
+                ${debug} "Processing Additional regex file: '${custom_regex_file}'" 2> /dev/null
+                computed_series_slug=$(echo "${computed_series_slug}" | ${my_sed} -f "${custom_regex_file}")
+            else
+                ${debug} "Ignoring malformed custom regex file '${custom_regex_file}'" 2> /dev/null
+            fi
+
         fi
     
         ${debug} "Computed Series Slug: ${computed_series_slug}" 2> /dev/null

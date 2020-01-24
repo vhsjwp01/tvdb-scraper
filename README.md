@@ -13,7 +13,7 @@ prompt$> sudo make install
 Installs as `/usr/local/bin/tvdb_scrape.sh`
 
 ### Requirements
-* the `tvdb_scrape.sh` script expects a variable named `defaults_file` that points to a configuration file (defaults to `"/etc/default/tvdb_scrape"`) whose format is as follows:
+* the `tvdb_scrape.sh` script uses an internal variable named `defaults_file` that points to a configuration file (defaults to `"/etc/default/tvdb_scrape"`) whose format is as follows:
 ```
 TVDB_USERNAME="<your thetvdb.com username>"
 TVDB_USERKEY="<your thetvdb.com user key> (login and visit your dashboard to retrieve this)"
@@ -25,7 +25,8 @@ JWT_EXPIRY="3600"
 incoming_folder="<path to files needing to be renamed>"
 staging_folder="<path to put renamed files>"
 ```
-  * **NOTE:** The `defaults_file` variable in the script can be overridden by exporting an environment variable called `TVDB_SCRAPE_DEFAULTS`
+  * **NOTE:** The script's internal variable `defaults_file` can be overridden by exporting an environment variable called `TVDB_SCRAPE_DEFAULTS`
+  * **NOTE:** The script can also query an addition regex file called `"/etc/default/tvdb_scrape_custom_regex"`.  By placing `sed` compatible regexes (one per line) the script will call them via `sed -f /etc/default/tvdb_scrape_custom_regex` during the discernment of the `Computed Series Slug`
 
 This script parses the file named by argument 1 to create something knowable by **thetvdb.com** API like so:
 * Assume a path of `incoming_folder="/tmp/foo"`
