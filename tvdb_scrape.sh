@@ -13,6 +13,8 @@ let exit_code=${SUCCESS}
 batch="false"
 debug=""
 
+custom_regex_file="/etc/default/tvdb_scrape_custom_regex"
+
 # WHAT: Ensure we have a defaults file
 # WHY:  Cannot proceed otherwise
 #
@@ -36,7 +38,7 @@ if [ ${exit_code} -eq ${SUCCESS} ]; then
 fi
 
 # WHAT: Make sure we have some needed commands
-# WHY:  They get u${my_sed} later on
+# WHY:  They get used later on
 #
 if [ ${exit_code} -eq ${SUCCESS} ]; then
     err_msg="Missing commands:"
@@ -65,7 +67,7 @@ if [ ${exit_code} -eq ${SUCCESS} ]; then
 
 fi
 
-# WHAT: Make sure we retrieve and save a JWT to a re-usable file
+# WHAT: Make sure we retrieve and save a JWT to a time-sensitive but re-usable file
 # WHY:  Cannot proceed otherwise
 #
 if [ ${exit_code} -eq ${SUCCESS} ]; then
@@ -102,7 +104,7 @@ if [ ${exit_code} -eq ${SUCCESS} ]; then
 
 fi
         
-# WHAT: See if we were pas${my_sed} some ancillary arguments
+# WHAT: See if we were passed some ancillary arguments
 # WHY:  Operations potentially depend on them
 #
 if [ ${exit_code} -eq ${SUCCESS} ]; then
@@ -147,10 +149,23 @@ if [ ${exit_code} -eq ${SUCCESS} ]; then
         input_file=$(${my_basename} "${input_file_name}")
         input_dir=$(${my_dirname} "$(${my_realpath} -e "${input_file_name}" 2> /dev/null)" 2> /dev/null)
         file_extension=$(echo "${input_file_name}" | ${my_awk} -F'.' '{print $NF}')
-        series_search_regex=$(echo "${input_file}" | ${my_awk} -F'[Ss][0-9]*[Ee][0-9]*' '{print $1}' | ${my_sed} -e 's|[^a-zA-Z0-9\-]| |g' -e 's| $||g' -e 's| |%20|g')
+        series_search_regex=$(echo "${input_file}" | ${my_sed} -e 's|[^a-zA-Z0-9\-]| |g' -e 's| $||g' -e 's| |%20|g' | ${my_awk} -F'%20[Ss][0-9]*[Ee][0-9]*%20' '{print $1}')
     
-        # The last part of this variable definition is a hack for Agents of S.H.I.E.L.D.
-        computed_series_slug=$(echo "${series_search_regex}" | ${my_tr} '[A-Z]' '[a-z]' | ${my_sed} -e 's|%20|-|g' -e 's|agents-of-s-h-i-e-l-d|agents-of-shield|g')
+        # You can make this script process any custom regexes in order to accurately produce
+        # a ${computed_series_slug} recognizable by thetvdb API by placing them in a file called
+        # '/etc/default/tvdb_scrape_custom_regex'.  Place each sed compatible regex on a line like so:
+        #
+        # s|agents-of-s-h-i-e-l-d|agents-of-shield|g;
+        #
+        # If this custom regex file is present, then it will be processed by 'sed' using the '-f' flag
+        # during discernment of the '${computed_series_slug}'
+        #
+        computed_series_slug=$(echo "${series_search_regex}" | ${my_tr} '[A-Z]' '[a-z]' | ${my_sed} -e 's|%20|-|g')
+
+        if [ -e "${custom_regex_file}" ]; then
+            ${debug} "Processing Additional regex file: ${custom_regex_file}" 2> /dev/null
+            computed_series_slug=$(echo "${computed_series_slug}" | ${my_sed} -f "${custom_regex_file}")
+        fi
     
         ${debug} "Computed Series Slug: ${computed_series_slug}" 2> /dev/null
     

@@ -13,7 +13,7 @@ prompt$> sudo make install
 Installs as `/usr/local/bin/tvdb_scrape.sh`
 
 ### Requirements
-* the `tvdb_scrape.sh` script expects a variable named `defaults_file` (defaults to `"/etc/default/tvdb_scrape"`) that points to a configuration file whose format is as follows:
+* the `tvdb_scrape.sh` script expects a variable named `defaults_file` that points to a configuration file (defaults to `"/etc/default/tvdb_scrape"`) whose format is as follows:
 ```
 TVDB_USERNAME="<your thetvdb.com username>"
 TVDB_USERKEY="<your thetvdb.com user key> (login and visit your dashboard to retrieve this)"
