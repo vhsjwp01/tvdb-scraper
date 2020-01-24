@@ -13,5 +13,8 @@ install:
 	    ;;                                                         \
 	    *)                                                         \
 	        echo "Unknown (and unsupported) platform: ${PLATFORM}" \
-	    ;; \
-	esac
+	    ;;                                                         \
+	esac                                                         ; \
+	if [ -x "${TARGET_DIR}/${SOURCE}" ]; then                      \
+	    echo "SUCCESS"                                           ; \
+	fi
