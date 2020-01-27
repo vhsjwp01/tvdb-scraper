@@ -183,7 +183,7 @@ if [ ${exit_code} -eq ${SUCCESS} ]; then
         if [ ! -z "${series_info}" ]; then
             series_id=$(echo "${series_info}" | ${my_jq} ".id" | ${my_sed} -e 's|"||g')
             series_name=$(echo "${series_info}" | ${my_jq} ".seriesName" | ${my_iconv} -f utf-8 -t ascii//TRANSLIT | ${my_sed} -e 's|\"||g' -e 's|:| -|g')
-            episode=$(echo "${input_file}" | ${my_sed} 's|^.*\([Ss][0-9]*[Ee][0-9]*\).*$|\1|g' | ${my_tr} '[a-z]' '[A-Z]')
+            episode=$(echo "${input_file}" | ${my_sed} -e 's| |%20|g' -e 's|\.|%20|g' -e 's|-|%20|g' -e 's|^.*%20\([Ss][0-9]*[Ee][0-9]*\)%20.*$|\1|g' | ${my_tr} '[a-z]' '[A-Z]')
     
             ${debug} "Series ID: ${series_id}"           2> /dev/null
             ${debug} "Series Name: ${series_name}"       2> /dev/null
