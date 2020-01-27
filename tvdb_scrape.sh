@@ -187,12 +187,26 @@ if [ ${exit_code} -eq ${SUCCESS} ]; then
     
             ${debug} "Series ID: ${series_id}"           2> /dev/null
             ${debug} "Series Name: ${series_name}"       2> /dev/null
-            ${debug} "Series Episode Number: ${episode}" 2> /dev/null
     
             # Bail if we don't have an episode in the format of S[0-9]*E[0-9]*
             if [ ! -z "${episode}" ]; then
                 aired_season=$(echo "${episode}" | ${my_awk} -F'E' '{print $1}' | ${my_sed} -e 's|^S||g')
-                aired_episode=$(echo "${episode}" | ${my_awk} -F'E' '{print $2}')
+                aired_season_numeral=$(echo "$(echo "${episode}" | ${my_awk} -F'E' '{print $1}' | ${my_sed} -e 's|[^0-9]||g')*1" | bc)
+                let aired_season=${aired_season_numeral}
+
+                if [ ${aired_season} -lt 10 ]; then
+                    aired_season="0${aired_season_numeral}"
+                fi
+
+                aired_episode_numeral=$(echo "$(echo "${episode}" | ${my_awk} -F'E' '{print $2}' | ${my_sed} -e 's|[^0-9]||g')*1" | bc)
+                let aired_episode=${aired_episode_numeral}
+
+                if [ ${aired_episode} -lt 10 ]; then
+                    aired_episode="0${aired_episode_numeral}"
+                fi
+
+                ${debug} "Series Episode Number: S${aired_season}E${aired_episode}" 2> /dev/null
+
                 episode_info=$(${my_curl} -L -X GET --header 'Accept: application/json' --header "Authorization: Bearer ${JWT}" "https://api.thetvdb.com/series/${series_id}/episodes/query?airedSeason=${aired_season}&airedEpisode=${aired_episode}" -s | ${my_jq} ".")
     
                 # Bail if we don't have any episode info
