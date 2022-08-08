@@ -149,7 +149,7 @@ if [ ${exit_code} -eq ${SUCCESS} ]; then
         input_file=$(${my_basename} "${input_file_name}")
         input_dir=$(${my_dirname} "$(${my_realpath} -e "${input_file_name}" 2> /dev/null)" 2> /dev/null)
         file_extension=$(echo "${input_file_name}" | ${my_awk} -F'.' '{print $NF}')
-        series_search_regex=$(echo "${input_file}" | ${my_sed} -e 's|[^a-zA-Z0-9\-]| |g' -e 's| $||g' -e 's| |%20|g' | ${my_awk} -F'%20[Ss][0-9]*[Ee][0-9]*%20' '{print $1}')
+	series_search_regex=$(echo "${input_file}" | ${my_sed} -e 's|[^a-zA-Z0-9\-]| |g' -e 's| $||g' -e 's|\([Ss][0-9]*[Ee][0-9]*\)| \1 |g' -e 's| |%20|g' | ${my_awk} -F'%20[Ss][0-9]*[Ee][0-9]*%20' '{print $1}')
     
         # You can make this script process any custom regexes in order to accurately produce
         # a ${computed_series_slug} recognizable by thetvdb API by placing them in a file called
