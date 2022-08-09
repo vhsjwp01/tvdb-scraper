@@ -160,7 +160,7 @@ if [ ${exit_code} -eq ${SUCCESS} ]; then
         # If this custom regex file is present, then it will be processed by 'sed' using the '-f' flag
         # during discernment of the '${computed_series_slug}'
         #
-        computed_series_slug=$(echo "${series_search_regex}" | ${my_tr} '[A-Z]' '[a-z]' | ${my_sed} -e 's|%20|-|g')
+        computed_series_slug=$(echo "${series_search_regex}" | ${my_tr} '[A-Z]' '[a-z]' | ${my_sed} -e 's|%20|-|g' -e 's|-$||g')
 
         if [ -e "${custom_regex_file}" ]; then
             echo "test line" | ${my_sed} -f "${custom_regex_file}" > /dev/null 2>&1
