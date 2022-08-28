@@ -211,7 +211,7 @@ if [ ${exit_code} -eq ${SUCCESS} ]; then
     
                 # Bail if we don't have any episode info
                 if [ ! -z "${episode_info}" ]; then
-                    episode_name=$(echo "${episode_info}" | ${my_jq} ".data[0].episodeName" | ${my_iconv} -f utf-8 -t ascii//TRANSLIT | ${my_sed} -e 's|"||g' -e 's|:| -|g' -e 's|?| |g' -e 's|  | |g' -e 's| ,|,|g' -e 's| $||g' -e 's|\(([0-9]*\)\/\([0-9]*)\)|\1 of \2|g' -e 's|/|-|g')
+                    episode_name=$(echo "${episode_info}" | ${my_jq} ".data[0].episodeName" | ${my_iconv} -f utf-8 -t ascii//TRANSLIT | ${my_sed} -e 's|"||g' -e 's|:| -|g' -e 's|?| |g' -e 's|  | |g' -e 's| ,|,|g' -e 's| $||g' -e 's|\(([0-9]*\)\/\([0-9]*)\)|\1 of \2|g' -e 's|/|-|g' -e "s|\\\|'|g")
 
                     ${debug} "Series Episode Name: ${episode_name}" 2> /dev/null
     
